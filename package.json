@@ -8,10 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@git.marsden.site:jake/net-decode"
+    "url": "git@git.marsden.site:jake/net-decode.git"
   },
   "license": "MIT",
   "private": true,
+  "files": [
+    "/build"
+  ],
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
   "dependencies": {
     "tslib": "1.10.0"
   },
@@ -33,6 +38,5 @@
     "compile": "tsc",
     "lint": "tslint -c tslint.json -p tsconfig.json",
     "test": "jest -c jest.json"
-  },
-  "main": "build/index.js"
+  }
 }

@@ -28,9 +28,6 @@
     "no-consecutive-blank-lines": {
       "options": 2
     },
-    "no-console": {
-      "severity": "off"
-    },
     "no-empty-interface": {
       "severity": "off"
     },
