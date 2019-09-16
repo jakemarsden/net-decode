@@ -2,6 +2,10 @@
  * 4 octets
  */
 export type Ipv4Address = number
+/**
+ * 16 octets, split into 32-bit integers
+ */
+export type Ipv6Address = [number, number, number, number]
 
 /**
  * @see https://tools.ietf.org/html/rfc791#section-3.1
