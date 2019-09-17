@@ -37,6 +37,7 @@
     "clean": "rimraf build/* coverage/*",
     "compile": "tsc",
     "lint": "tslint -c tslint.json -p tsconfig.json",
-    "test": "jest -c jest.json"
+    "test": "jest -c jest.json",
+    "test:watch": "nodemon -V -e * -x \"npm run test\" -w jest.json -w tsconfig.json -w src"
   }
 }
