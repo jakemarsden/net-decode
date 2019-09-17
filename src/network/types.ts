@@ -7,6 +7,8 @@ export type Ipv4Address = number
  */
 export type Ipv6Address = [number, number, number, number]
 
+export type Packet = Ipv4Packet
+
 /**
  * @see https://tools.ietf.org/html/rfc791#section-3.1
  */

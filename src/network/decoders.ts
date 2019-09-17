@@ -1,4 +1,14 @@
-import { Ipv4Packet } from "./types"
+import { ETHERTYPE } from "../link"
+import { Ipv4Packet, Packet } from "./types"
+
+export function decodePacket(ethertype: number, buf: Buffer): Packet | undefined {
+    switch (ethertype) {
+        case ETHERTYPE.IPv4:
+            return decodeIpv4Packet(buf)
+        default:
+            return undefined
+    }
+}
 
 export function decodeIpv4Packet(buf: Buffer): Ipv4Packet | undefined {
     const versionAndIhl = buf.readUInt8(0)

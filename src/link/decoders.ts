@@ -1,21 +1,21 @@
 import { ETHERTYPE } from "./constants"
-import { Dot1qTag, EthernetIIFrame, Ieee802Dot3Frame } from "./types"
+import { Dot1qTag, EthernetIIFrame, Frame, Ieee802Dot3Frame } from "./types"
 
-export function decodeFrame(buf: Buffer): EthernetIIFrame | Ieee802Dot3Frame | undefined {
+export function decodeFrame(buf: Buffer): Frame | undefined {
     const typeOrLength = buf.readUInt16BE(12)
 
     if (typeOrLength >= 0x600) {
         // Ethernet II frame
-        return decodeEthernetIIFrame(buf, typeOrLength)
+        return decodeEthernetIIFrame(typeOrLength, buf)
     }
     if (typeOrLength <= 1500) {
         // IEEE 802.3 frame
-        return decode802Dot3Frame(buf, typeOrLength)
+        return decode802Dot3Frame(typeOrLength, buf)
     }
     return undefined
 }
 
-function decodeEthernetIIFrame(buf: Buffer, ethertype: number): EthernetIIFrame {
+function decodeEthernetIIFrame(ethertype: number, buf: Buffer): EthernetIIFrame | undefined {
     const dot1qTags: Dot1qTag[] = []
     while (ethertype === ETHERTYPE.Dot1q || ethertype === ETHERTYPE.QinQ) {
         const tci = buf.readUInt16BE(12 + 4 * dot1qTags.length + 2)
@@ -39,7 +39,7 @@ function decodeEthernetIIFrame(buf: Buffer, ethertype: number): EthernetIIFrame 
     return frame
 }
 
-function decode802Dot3Frame(buf: Buffer, length: number): Ieee802Dot3Frame {
+function decode802Dot3Frame(length: number, buf: Buffer): Ieee802Dot3Frame | undefined {
     // TODO: decode the IEEE 802.2 LLC header which follows
     const frame: Ieee802Dot3Frame = {
         destinationAddress: buf.readUIntBE(0, 6),

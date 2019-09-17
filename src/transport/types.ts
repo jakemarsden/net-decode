@@ -1,3 +1,5 @@
+export type Segment = TcpSegment | UdpSegment
+
 /**
  * @see https://tools.ietf.org/html/rfc793#section-3.1
  */

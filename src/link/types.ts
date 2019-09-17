@@ -5,6 +5,8 @@ import { ETHERTYPE } from "./constants"
  */
 export type MacAddress = number
 
+export type Frame = EthernetIIFrame | Ieee802Dot3Frame
+
 /**
  * @see https://en.wikipedia.org/wiki/Ethernet_frame#Ethernet_II
  */
